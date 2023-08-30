@@ -14,11 +14,6 @@ const AddBookModel = (props)=> {
   const [publishYear, setPublishYear] = useState('');
   
   const [imageFile, setImageFile] = useState(null);
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    setImageFile(file);
-}; 
-
 
   const handleSubmit = (e)=>{
     e.preventDefault(); 
@@ -30,8 +25,9 @@ const AddBookModel = (props)=> {
         pages,
         price,
         desc,
-        publishYear
-      };
+        publishYear,
+        image: imageFile ? URL.createObjectURL(imageFile) : null, 
+      }; 
   
       axios
       .post("http://localhost:3000/BooksData", newBook)
@@ -42,6 +38,12 @@ const AddBookModel = (props)=> {
       })
       .catch((err) => console.log(err));
 }
+
+
+const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    setImageFile(file);
+}; 
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);

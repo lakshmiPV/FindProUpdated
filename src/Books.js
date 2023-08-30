@@ -24,7 +24,7 @@ const Books = () => {
         axios.get("http://localhost:3000/BooksData")
         .then((response)=>setBooks(response.data))
         .catch(error=>console.log(error))
-      })
+      },[])
 
 //       const handleSubmit = (e)=>{
 //         e.preventDefault(); 
@@ -34,9 +34,9 @@ const Books = () => {
 //         .then(err=>console.log(err))
 
 //   }
-const updateBooks = (newBook) => {
-    setBooks([...books, newBook]);
-  };
+        const updateBooks = (newBook) => {
+            setBooks([...books, newBook]);
+        };
     
   return (
     <>

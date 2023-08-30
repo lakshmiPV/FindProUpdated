@@ -20,9 +20,10 @@ const BooksList = () => {
 
     useEffect(()=>{
       axios.get("http://localhost:3000/BooksData")
+      //.then((response)=>console.log(response.data))
       .then((response)=>setBooks(response.data))
       .catch(error=>console.log(error))
-    })
+    },[])
     
   return (
     <>
@@ -38,14 +39,14 @@ const BooksList = () => {
                             <th>Pages</th>
                             <th>Price</th>
                             <th>Description</th>
-                            <th>Pulish Year</th>
+                            <th>Publish Year</th>
                             <th>Image</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
                             books.map((item)=>{
-                                const {id, name, author, pages, price, description, publish_year, image} = item
+                                const {id, name, author, pages, price, desc, publishYear, image} = item
                                 return(  
                                     <tr key={id}>
                                         <td>{id}</td>
@@ -53,10 +54,10 @@ const BooksList = () => {
                                         <td>{author}</td>
                                         <td>{pages}</td>
                                         <td>{price}</td>
-                                        <td>{description}</td>
-                                        <td>{publish_year}</td>
-                                        <td><img style={{ width: 100, height: 120 }}  src={item.image} alt={`book_${id}`}/></td>
-                                    </tr>
+                                        <td>{desc}</td>
+                                        <td>{publishYear}</td>
+                                        <td><img style={{ width: 100, height: 120 }} src={item.image ? item.image : ''} alt={`book_${id}`} /></td>
+                                  </tr>
                                 )
                             })
                         }
